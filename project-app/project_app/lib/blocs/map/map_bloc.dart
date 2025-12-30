@@ -24,6 +24,7 @@ part 'map_state.dart';
 class MapBloc extends Bloc<MapEvent, MapState> {
   /// Controlador para manejar el mapa de Google Maps.
   GoogleMapController? _mapController;
+<<<<<<< HEAD
 
   /// Bloc de ubicación para obtener datos de la posición del usuario.
   final LocationBloc locationBloc;
@@ -31,6 +32,15 @@ class MapBloc extends Bloc<MapEvent, MapState> {
   /// Suscripción para escuchar los cambios de estado del [LocationBloc].
   StreamSubscription<LocationState>? locationSubscription;
 
+=======
+ 
+  /// Bloc de ubicación para obtener datos de la posición del usuario.
+  final LocationBloc locationBloc;
+
+  /// Suscripción para escuchar los cambios de estado del [LocationBloc].
+  StreamSubscription<LocationState>? locationSubscription;
+
+>>>>>>> mi-trabajo-temporal
   /// Coordenadas actuales del centro del mapa.
   LatLng? mapCenter;
 
@@ -38,7 +48,11 @@ class MapBloc extends Bloc<MapEvent, MapState> {
   ///
   /// Requiere un [LocationBloc] para obtener datos de la ubicación del usuario.
   MapBloc({required this.locationBloc}) : super(const MapState()) {
+<<<<<<< HEAD
     // Manejo de eventos del MapBloc
+=======
+     // Manejo de eventos del MapBloc
+>>>>>>> mi-trabajo-temporal
     on<OnMapInitializedEvent>(_onInitMap);
     on<OnStartFollowingUserEvent>(_onStartFollowingUser);
     on<OnStopFollowingUserEvent>(
@@ -74,7 +88,11 @@ class MapBloc extends Bloc<MapEvent, MapState> {
       // Si no se está siguiendo al usuario, no mover la cámara.
       if (!state.isFollowingUser) return;
       if (locationState.lastKnownLocation == null) return;
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> mi-trabajo-temporal
       // Mueve la cámara al usuario si se está siguiendo.
       moveCamera(locationState.lastKnownLocation!);
     });
@@ -132,10 +150,17 @@ class MapBloc extends Bloc<MapEvent, MapState> {
       startCap: Cap.roundCap,
       endCap: Cap.roundCap,
     );
+<<<<<<< HEAD
 
     final currentPolylines = Map<String, Polyline>.from(state.polylines);
     currentPolylines['myRoute'] = myRoute;
 
+=======
+    
+    final currentPolylines = Map<String, Polyline>.from(state.polylines);
+    currentPolylines['myRoute'] = myRoute;
+    
+>>>>>>> mi-trabajo-temporal
     emit(state.copyWith(polylines: currentPolylines));
   }
 
@@ -144,7 +169,11 @@ class MapBloc extends Bloc<MapEvent, MapState> {
   /// - [tour]: Contiene los puntos de interés y la ruta del tour.
   Future<void> drawEcoCityTour(EcoCityTour tour) async {
     log.i('Dibujando EcoCityTour en el mapa: ${tour.name}');
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> mi-trabajo-temporal
     // Crear la polilínea del tour.
     final myRoute = Polyline(
       polylineId: const PolylineId('route'),
@@ -178,7 +207,11 @@ class MapBloc extends Bloc<MapEvent, MapState> {
     }
 
     final currentPolylines = Map<String, Polyline>.from(state.polylines);
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> mi-trabajo-temporal
     // Añadir la polilínea del tour.
     currentPolylines['route'] = myRoute;
 
@@ -199,7 +232,11 @@ class MapBloc extends Bloc<MapEvent, MapState> {
     }
   }
 
+<<<<<<< HEAD
   /// Muestra los detalles de un punto de interés en un BottomSheet.
+=======
+   /// Muestra los detalles de un punto de interés en un BottomSheet.
+>>>>>>> mi-trabajo-temporal
   void showPlaceDetails(BuildContext context, PointOfInterest poi) {
     log.i('Mostrando detalles del POI: ${poi.name}');
     showModalBottomSheet(
@@ -225,7 +262,11 @@ class MapBloc extends Bloc<MapEvent, MapState> {
     emit(state.copyWith(markers: updatedMarkers));
   }
 
+<<<<<<< HEAD
   /// Añade un marcador de punto de interés al mapa.
+=======
+   /// Añade un marcador de punto de interés al mapa.
+>>>>>>> mi-trabajo-temporal
   Future<void> _onAddPoiMarker(
       OnAddPoiMarkerEvent event, Emitter<MapState> emit) async {
     log.i('Añadiendo marcador de POI: ${event.poi.name}');

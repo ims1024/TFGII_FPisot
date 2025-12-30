@@ -30,8 +30,108 @@ class TourSummaryScreen extends StatelessWidget {
           appBar: _buildAppBar(context),
           body: Column(
             children: [
+<<<<<<< HEAD
               _buildSummaryCard(context, state, cardWidth),
               _buildPoiList(context, state),
+=======
+              // Tarjeta que muestra los detalles principales del tour
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                child: Center(
+                  child: SizedBox(
+                    width:
+                        cardWidth, // Ajusta el tamaño al 90% del ancho de la pantalla
+                    child: Card(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(16),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            // Información de la ciudad
+                            Text(
+                              '${'city'.tr()}: ${state.ecoCityTour!.city}',
+                              style: const TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+
+                            // Información de la distancia total
+                            Text(
+                              '${'distance'.tr()}: ${formatDistance(state.ecoCityTour!.distance ?? 0)}',
+                              style: const TextStyle(fontSize: 16),
+                            ),
+                            const SizedBox(height: 4),
+
+                            // Información de la duración total
+                            Text(
+                              '${'duration'.tr()}: ${formatDuration((state.ecoCityTour!.duration ?? 0).toInt())}',
+                              style: const TextStyle(fontSize: 16),
+                            ),
+                            const SizedBox(height: 4),
+
+                            // Información del medio de transporte
+                            Row(
+                              children: [
+                                Text('${'transport_mode'.tr()}:',
+                                    style: const TextStyle(fontSize: 16)),
+                                const SizedBox(width: 8),
+                                Icon(
+                                  transportIcons[state.ecoCityTour!.mode],
+                                  size: 24,
+                                  color: Theme.of(context).primaryColor,
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 8),
+                            // Gustos del usuario (íconos pequeños)
+                            if (state.ecoCityTour!.userPreferences.isNotEmpty)
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: state.ecoCityTour!.userPreferences
+                                    .map((preference) {
+                                  final prefIconData =
+                                      userPreferences[preference];
+                                  if (prefIconData != null) {
+                                    return Padding(
+                                      padding:
+                                          const EdgeInsets.only(right: 8.0),
+                                      child: Icon(
+                                        prefIconData['icon'],
+                                        color: prefIconData['color'],
+                                        size: 24, // Tamaño pequeño
+                                      ),
+                                    );
+                                  } else {
+                                    return const SizedBox.shrink();
+                                  }
+                                }).toList(),
+                              ),
+                            const SizedBox(height: 8),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+
+              // Lista de puntos de interés (POIs)
+              Expanded(
+                child: ListView.builder(
+                  itemCount: state.ecoCityTour!.pois.length,
+                  itemBuilder: (context, index) {
+                    final poi = state.ecoCityTour!.pois[index];
+                    return ExpandablePoiItem(
+                        poi: poi, tourBloc: BlocProvider.of<TourBloc>(context));
+                  },
+                ),
+              ),
+>>>>>>> mi-trabajo-temporal
             ],
           ),
         );

@@ -105,6 +105,12 @@ Widget _buildMapView(LocationState locationState) {
               tourState.ecoCityTour!.pois.isNotEmpty)
           ? tourState.ecoCityTour!.pois.first.gps
           : locationState.lastKnownLocation;
+      
+      // Filtrar las polilíneas según el estado de showUserRoute
+      Map<String, Polyline> filteredPolylines = Map.from(mapState.polylines);
+      if (!mapState.showUserRoute) {
+        filteredPolylines.removeWhere((key, _) => key == 'myRoute');
+      }
 
       // Filtrar las polilíneas según el estado de showUserRoute
       Map<String, Polyline> filteredPolylines = Map.from(mapState.polylines);
